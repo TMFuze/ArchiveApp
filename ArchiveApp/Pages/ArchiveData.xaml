@@ -144,5 +144,26 @@
                 </Button.Template>
             </Button>
         </StackPanel>
+        <TextBox Name="SearchBox"
+             Grid.Row="1"
+             Grid.Column="0"
+             Margin="5"
+             Width="200"
+             Height="30"
+             FontSize="16"
+             VerticalAlignment="Center"
+             HorizontalAlignment="Center"
+             KeyUp="SearchBox_KeyUp_1">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Padding" Value="5"/>
+                    <Style.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter Property="Padding" Value="5, 5, 30, 5"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
     </Grid>
 </Page>
