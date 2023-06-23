@@ -21,6 +21,10 @@ namespace ArchiveApp.Windows
     /// </summary>
     public partial class AddFileWin : Window
     {
+
+        public int? SelectedFolderId { get; private set; }
+
+
         public AddFileWin()
         {
             InitializeComponent();
@@ -33,24 +37,16 @@ namespace ArchiveApp.Windows
         {
             if (DBCon.entObj.ArchiveFile.Count(x => x.Name == Descriptions.Text) > 0)
             {
-                MessageBox.Show("Такой файл уже есть!",
-                "Уведомление",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+                MessageBox.Show("Такой файл уже есть!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
-
             else
             {
                 try
                 {
-                    if (FileName.Text == null | FileName.Text.Trim() == "" | Descriptions.Text == null | Descriptions.Text.Trim() == "" )
+                    if (FileName.Text == null | FileName.Text.Trim() == "" | Descriptions.Text == null | Descriptions.Text.Trim() == "")
                     {
-                        MessageBox.Show("Заполните все строки!",
-                   "Уведомление",
-                   MessageBoxButton.OK,
-                   MessageBoxImage.Warning);
+                        MessageBox.Show("Заполните все строки!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
                     ArchiveFile recipeObj = new ArchiveFile()
@@ -58,29 +54,25 @@ namespace ArchiveApp.Windows
                         IdFolder = Convert.ToInt32(FoldersBx.SelectedValue),
                         Name = FileName.Text,
                         Description = Descriptions.Text,
-
-
                     };
                     DBCon.entObj.ArchiveFile.Add(recipeObj);
                     DBCon.entObj.SaveChanges();
-                    MessageBox.Show("Файл добавлен!",
-                    "Уведомление",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
+                    MessageBox.Show("Файл добавлен!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Установка выбранной папки для передачи в главную форму
+                    SelectedFolderId = recipeObj.IdFolder;
+
                     FoldersBx.SelectedItem = null;
                     Descriptions.Text = "";
                     FileName.Text = "";
                     this.Close();
-
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Критический сбой работы приложения: " + ex.Message.ToString(),
-                        "Критический сбой работы приложения",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Warning);
+                    MessageBox.Show("Критический сбой работы приложения: " + ex.Message.ToString(), "Критический сбой работы приложения", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
             }
         }
     }
-}
+    }
+

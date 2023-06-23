@@ -106,6 +106,21 @@ namespace ArchiveApp.Pages
         private void AddFileBtn_Click(object sender, RoutedEventArgs e)
         {
             var newForm = new AddFileWin();
+            newForm.Closed += (s, args) =>
+            {
+                // Обновление сетки грида
+                UpdateDataGrid();
+
+                // Обновление списка всех файлов
+                allItems = DBCon.entObj.ArchiveFile.ToList();
+
+                // Выбор добавленной папки
+                var addedFolderId = newForm.SelectedFolderId;
+                if (addedFolderId != null)
+                {
+                    FolderBox.SelectedValue = addedFolderId;
+                }
+            };
             newForm.Show();
         }
 
@@ -173,6 +188,15 @@ namespace ArchiveApp.Pages
             {
                 DGItems.SelectedIndex = 0;
             }
+        }
+
+        private void RefreshDGBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Очищаем выбранную папку
+            FolderBox.SelectedItem = null;
+
+            // Обновляем данные в DGItems
+            DGItems.ItemsSource = DBCon.entObj.ArchiveFile.ToList();
         }
     }
 }

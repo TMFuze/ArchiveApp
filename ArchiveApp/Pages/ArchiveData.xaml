@@ -105,5 +105,41 @@
                 </TextBox.Style>
             </TextBox>
         </StackPanel>
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top">
+            <Button Width="Auto"
+                    Click="RefreshDGBtn_Click"
+        Height="Auto"
+        Margin="5"
+        Content="Сброс папки"
+        Name="RefreshDGBtn"
+        Background="#D9D9D9"
+        Foreground="#333333"
+        FontWeight="Bold"
+        FontSize="16">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="&#xE117;" FontFamily="Segoe MDL2 Assets" FontSize="16" Grid.Column="0"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 4 0"/>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
