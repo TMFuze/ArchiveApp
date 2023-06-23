@@ -108,17 +108,25 @@ namespace ArchiveApp.Pages
             var newForm = new AddFileWin();
             newForm.Closed += (s, args) =>
             {
-                // Обновление сетки грида
-                UpdateDataGrid();
-
                 // Обновление списка всех файлов
                 allItems = DBCon.entObj.ArchiveFile.ToList();
+
+                // Обновление сетки грида
+                UpdateDataGrid();
 
                 // Выбор добавленной папки
                 var addedFolderId = newForm.SelectedFolderId;
                 if (addedFolderId != null)
                 {
-                    FolderBox.SelectedValue = addedFolderId;
+                    // Выбор пустой папки
+                    FolderBox.SelectedItem = null;
+
+                    // Задержка для обновления сетки грида
+                    Dispatcher.Invoke(() =>
+                    {
+                        // Выбор добавленной папки после обновления сетки грида
+                        FolderBox.SelectedValue = addedFolderId;
+                    });
                 }
             };
             newForm.Show();
@@ -139,7 +147,18 @@ namespace ArchiveApp.Pages
                     DBCon.entObj.ArchiveFile.RemoveRange(filesForRemoving);
                     DBCon.entObj.SaveChanges();
                     MessageBox.Show("Данные удалены.");
-                    DGItems.ItemsSource = DBCon.entObj.ArchiveFile.ToList();
+
+                    // Получение выбранной папки перед обновлением данных
+                    var selectedFolder = FolderBox.SelectedItem as Folder;
+
+                    // Обновление значений в DataGrid
+                    UpdateDataGrid();
+
+                    // Повторный выбор папки, если она была выбрана
+                    if (selectedFolder != null)
+                    {
+                        FolderBox.SelectedItem = selectedFolder;
+                    }
                 }
                 else
                 {
