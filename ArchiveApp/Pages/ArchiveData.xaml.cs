@@ -14,13 +14,13 @@ namespace ArchiveApp.Pages
     /// </summary>
     public partial class ArchiveData : Page
     {
-        private List<ArchiveFile> allItems;     
+        private List<ArchiveFile> allItems;
 
         public ArchiveData()
         {
             InitializeComponent();
 
-
+            // Настройка ComboBox
             FolderBox.SelectedValuePath = "Id";
             FolderBox.DisplayMemberPath = "Name";
             FolderBox.ItemsSource = DBCon.entObj.Folder.ToList();
@@ -29,34 +29,34 @@ namespace ArchiveApp.Pages
             allItems = DBCon.entObj.ArchiveFile.ToList();
         }
 
-        
-
+        /// <summary>
+        /// Обработчик изменения выбранной папки в ComboBox.
+        /// </summary>
         private void FoldersBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-                UpdateDataGrid();
-            
+            UpdateDataGrid();
         }
 
+        /// <summary>
+        /// Обработчик клика кнопки "Удалить папку".
+        /// </summary>
         private void DelFolBtn_Click(object sender, RoutedEventArgs e)
         {
             var selectedFolder = FolderBox.SelectedItem as Folder;
             if (selectedFolder != null)
             {
                 var itemsForRemoving = DBCon.entObj.ArchiveFile.Where(x => x.IdFolder == selectedFolder.Id).ToList();
-                var productsForRemoving = new List<Folder> { selectedFolder };
+                var foldersForRemoving = new List<Folder> { selectedFolder };
 
                 try
                 {
-                    var result = MessageBox.Show("Вы уверены?",
-                        "Уведомление",
-                        MessageBoxButton.YesNo,
-                        MessageBoxImage.Question);
+                    var result = MessageBox.Show("Вы уверены?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                     if (result == MessageBoxResult.Yes)
                     {
+                        // Удаление выбранных папок и связанных файлов из базы данных
                         DBCon.entObj.ArchiveFile.RemoveRange(itemsForRemoving);
-                        DBCon.entObj.Folder.RemoveRange(productsForRemoving);
+                        DBCon.entObj.Folder.RemoveRange(foldersForRemoving);
                         DBCon.entObj.SaveChanges();
                         MessageBox.Show("Данные удалены.");
 
@@ -77,44 +77,51 @@ namespace ArchiveApp.Pages
             }
         }
 
+        /// <summary>
+        /// Обработчик клика кнопки "Добавить папку".
+        /// </summary>
         private void AddFolBtn_Click(object sender, RoutedEventArgs e)
         {
             var newForm = new AddFolderWin();
             newForm.Show();
         }
 
+        /// <summary>
+        /// Обработчик события изменения видимости страницы.
+        /// </summary>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (Visibility == Visibility.Visible)
             {
+                // Обновление данных при возвращении на страницу
                 DBCon.entObj.ChangeTracker.Entries().ToList().ForEach(x => x.Reload());
                 DGItems.ItemsSource = DBCon.entObj.ArchiveFile.ToList();
                 FolderBox.ItemsSource = DBCon.entObj.Folder.ToList();
-                
-                
-
             }
         }
 
+        /// <summary>
+        /// Обработчик клика кнопки "Добавить файл".
+        /// </summary>
         private void AddFileBtn_Click(object sender, RoutedEventArgs e)
         {
             var newForm = new AddFileWin();
             newForm.Show();
         }
 
+        /// <summary>
+        /// Обработчик клика кнопки "Удалить файл".
+        /// </summary>
         private void DelFileBtn_Click(object sender, RoutedEventArgs e)
         {
-            var productsForRemoving = DGItems.SelectedItems.Cast<ArchiveFile>().ToList();
+            var filesForRemoving = DGItems.SelectedItems.Cast<ArchiveFile>().ToList();
             try
             {
-
-                var result = MessageBox.Show("Вы уверены?",
-                   "Уведомление",
-                   MessageBoxButton.YesNo,
-                   MessageBoxImage.Question);
+                var result = MessageBox.Show("Вы уверены?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    DBCon.entObj.ArchiveFile.RemoveRange(productsForRemoving);
+                    // Удаление выбранных файлов из базы данных
+                    DBCon.entObj.ArchiveFile.RemoveRange(filesForRemoving);
                     DBCon.entObj.SaveChanges();
                     MessageBox.Show("Данные удалены.");
                     DGItems.ItemsSource = DBCon.entObj.ArchiveFile.ToList();
@@ -130,6 +137,9 @@ namespace ArchiveApp.Pages
             }
         }
 
+        /// <summary>
+        /// Обработчик события KeyUp для TextBox поиска.
+        /// </summary>
         private void SearchBox_KeyUp_1(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == System.Windows.Input.Key.Enter)
@@ -138,6 +148,9 @@ namespace ArchiveApp.Pages
             }
         }
 
+        /// <summary>
+        /// Обновление данных в DataGrid на основе выбранных параметров поиска.
+        /// </summary>
         private void UpdateDataGrid()
         {
             var selectedFolder = FolderBox.SelectedItem as Folder;

@@ -10,50 +10,25 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-
-        <StackPanel VerticalAlignment="Center" 
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    >
-            <TextBlock Text="Выберите Папку:" 
-                       Width="auto" 
-                       Height="auto"
-                       FontSize="20"/>
-            <ComboBox Name="FolderBox"
-                      Width="auto"
-                      Height="auto"
-                      FontSize="20"
-                      SelectionChanged="FoldersBox_SelectionChanged"
-                      >
-                
-            </ComboBox>
+        <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Выберите Папку:" Width="auto" Height="auto" FontSize="20" />
+            <ComboBox Name="FolderBox" Width="auto" Height="auto" FontSize="20" SelectionChanged="FoldersBox_SelectionChanged" />
         </StackPanel>
 
-        <DataGrid Name="DGItems"
-                      AutoGenerateColumns="False" 
-                      IsReadOnly="True"
-                      Margin="10"
-                      Grid.Row="0"
-                      Grid.RowSpan="2"
-                      Grid.Column="1">
-            
+        <DataGrid Name="DGItems" AutoGenerateColumns="False" IsReadOnly="True" Margin="10" Grid.Row="0" Grid.RowSpan="2"
+              Grid.Column="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер файла"
-                                        Binding="{Binding Name}"
-                                        Width="1*"/>
-                <DataGridTextColumn Header="Описание"
-                                        Binding="{Binding Description}"
-                                        Width="4*"/>
+                <DataGridTextColumn Header="Номер файла" Binding="{Binding Name}" Width="1*" />
+                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="4*" />
                 <DataGridTemplateColumn Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -64,106 +39,71 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" 
-                    Grid.Column="1" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center"
-                    Width="auto"
-                    Height="auto">
-            <Button Name="AddFolBtn"
-                    Click="AddFolBtn_Click"
-                    Width="Auto" 
-                    FontSize="16" 
-                    Height="Auto" 
-                    Margin="5" 
-                    Content="Добавить папку" 
-                    Background="#F0F0F0" 
-                    Foreground="#333333" 
-                    FontWeight="Bold">
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right"
+                VerticalAlignment="Center" Width="auto" Height="auto">
+            <Button Name="AddFolBtn" Click="AddFolBtn_Click" Width="Auto" FontSize="16" Height="Auto" Margin="5"
+                Content="Добавить папку" Background="#F0F0F0" Foreground="#333333" FontWeight="Bold">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Width="Auto" 
-                    Height="Auto" 
-                    Margin="5" 
-                    Content="Удалить папку"
-                    Name="DelFolBtn"
-                    Background="#E6E6E6" 
-                    Foreground="#333333" 
-                    FontWeight="Bold" 
-                    FontSize="16"
-                    Click="DelFolBtn_Click">
+            <Button Width="Auto" Height="Auto" Margin="5" Content="Удалить папку" Name="DelFolBtn"
+                Background="#E6E6E6" Foreground="#333333" FontWeight="Bold" FontSize="16" Click="DelFolBtn_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Width="Auto" 
-                    Height="Auto" 
-                    Click="AddFileBtn_Click"
-                    Margin="5" 
-                    Content="Добавить файл"
-                    Name="AddFileBtn"
-                    Background="#D9D9D9" 
-                    Foreground="#333333" 
-                    FontWeight="Bold" 
-                    FontSize="16">
+            <Button Width="Auto" Height="Auto" Click="AddFileBtn_Click" Margin="5" Content="Добавить файл" Name="AddFileBtn"
+                Background="#D9D9D9" Foreground="#333333" FontWeight="Bold" FontSize="16">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button Click="DelFileBtn_Click"
-                    Width="Auto" 
-                    Height="Auto" 
-                    Margin="5" 
-                    Content="Удалить файл" 
-                    Background="#CCCCCC" 
-                    Foreground="#333333" 
-                    FontWeight="Bold" 
-                    FontSize="16"
-                    Name="DelFileBtn">
+            <Button Click="DelFileBtn_Click" Width="Auto" Height="Auto" Margin="5" Content="Удалить файл"
+                Background="#CCCCCC" Foreground="#333333" FontWeight="Bold" FontSize="16" Name="DelFileBtn">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="#CCCCCC" BorderThickness="1"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
             </Button>
         </StackPanel>
-        <TextBox Name="SearchBox"
-             Grid.Row="1"
-             Grid.Column="0"
-             Margin="5"
-             Width="200"
-             Height="30"
-             FontSize="16"
-             VerticalAlignment="Center"
-             HorizontalAlignment="Center"
-             KeyUp="SearchBox_KeyUp_1">
-            <TextBox.Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Padding" Value="5"/>
-                    <Style.Triggers>
-                        <Trigger Property="Text" Value="">
-                            <Setter Property="Padding" Value="5, 5, 30, 5"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </TextBox.Style>
-        </TextBox>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                Orientation="Vertical">
+            <TextBlock Text="Поиск" HorizontalAlignment="Center" FontSize="25" />
+
+            <TextBox Name="SearchBox" Grid.Row="1" Grid.Column="0" Margin="5" Width="200" Height="30" FontSize="16"
+                 VerticalAlignment="Center" HorizontalAlignment="Center" KeyUp="SearchBox_KeyUp_1">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Padding" Value="5" />
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Padding" Value="5, 5, 30, 5" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+        </StackPanel>
     </Grid>
 </Page>
