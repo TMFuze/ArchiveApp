@@ -20,10 +20,8 @@ namespace ArchiveApp.Windows
     /// Логика взаимодействия для AddFileWin.xaml
     /// </summary>
     public partial class AddFileWin : Window
-    {
-
+    { 
         public int? SelectedFolderId { get; private set; }
-
 
         public AddFileWin()
         {

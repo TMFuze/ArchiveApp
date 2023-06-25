@@ -183,7 +183,7 @@ namespace ArchiveApp.Pages
         }
 
         /// <summary>
-        /// Обновление данных в DataGrid на основе выбранных параметров поиска.
+        /// Обновление данных в DataGrid на основе выбранных параметров поиска.Ф
         /// </summary>
         private void UpdateDataGrid()
         {
@@ -209,12 +209,15 @@ namespace ArchiveApp.Pages
             }
         }
 
+        /// <summary>
+        /// Обновление данных в data grid и сброс выбранной папки
+        /// </summary>
         private void RefreshDGBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Очищаем выбранную папку
+            // Clear selected folder
             FolderBox.SelectedItem = null;
 
-            // Обновляем данные в DGItems
+            // Refresh data in DGItems
             DGItems.ItemsSource = DBCon.entObj.ArchiveFile.ToList();
         }
     }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArchiveApp.Windows"
         mc:Ignorable="d"
-        Title="AddFileWin" Height="400" Width="400">
+        Title="Добавить файл" Height="400" Width="400">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel Orientation="Vertical">
             <TextBlock Text="Введите название файла" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" />

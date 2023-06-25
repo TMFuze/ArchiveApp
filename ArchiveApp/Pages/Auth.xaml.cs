@@ -37,8 +37,6 @@ namespace ArchiveApp.Pages
                                 "Уведомление",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-
-
                 }
                 else
                 {
@@ -57,12 +55,8 @@ namespace ArchiveApp.Pages
                                 "Уведомление",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-                            FrameApp.frmObj.Navigate(new Pages.ArchiveData());
-                            
-                           
-                            break;
-
-                    }
+                            FrameApp.frmObj.Navigate(new Pages.ArchiveData());                        
+                            break;                    }
                 }
             }
             catch (Exception ex)
