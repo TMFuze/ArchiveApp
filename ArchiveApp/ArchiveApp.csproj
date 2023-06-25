@@ -70,6 +70,9 @@
     <Compile Include="DBFrm\sp_helpdiagrams_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\UserArchiveData.xaml.cs">
+      <DependentUpon>UserArchiveData.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\AddFileWin.xaml.cs">
       <DependentUpon>AddFileWin.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MenuButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\UserArchiveData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

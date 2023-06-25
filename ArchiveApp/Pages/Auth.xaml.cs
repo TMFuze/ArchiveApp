@@ -49,7 +49,7 @@ namespace ArchiveApp.Pages
                                 "Уведомление",
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-                           FrameApp.frmObj.Navigate(new Pages.ArchiveData());
+                           FrameApp.frmObj.Navigate(new Pages.UserArchiveData());
 
                             break;
                         case 2:
